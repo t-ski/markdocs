@@ -33,19 +33,25 @@ function test(code, expectedTranslation) {
 test(`
 # Heading 1
 
-Text Text Text.
+**Bold text *italic* with nested inline styles** and an unstyled end.
+Inline code like a \`\`\`VARIABLE NAME\`\`\` in a new line (break sensitivity).
+Also supports extensive syntax like ~~Strikethrough~~, ~sub-~ and ^superscript^.
+Highlighting via ==emphasized text==.
 
 ## Heading 2
 
---- awdwa
+---
 `, `
 <h1>Heading 1</h1>
 <p>
-    Text Text Text.
+    <b>Bold text <i>italic</i> with inline styles</b> and an unstyled end.<br>
+    Inline code like a <code>VARIABLE NAME</code> in a new line (break sensitivity).<br>
+    Also supports extensive syntax like <s>strikethrough</s>, <sub>sub-</sub> and <sup>superscript</sup>.<br>
+    Highlighting via <em>emphasized text</em>.
 </p>
 <h2>Heading 2</h2>
 <hr>
 `);
 
 
-console.log("\x1b[32mAll tests have successfully passed.");
+console.log("\x1b[32mAll tests have successfully passed.\n");
