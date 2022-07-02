@@ -1,0 +1,22 @@
+{
+  "name": "markdocs",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "node lib.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/t-ski/markdocs.git"
+  },
+  "author": "Thassilo Martin Schiepanski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/t-ski/markdocs/issues"
+  },
+  "homepage": "https://github.com/t-ski/markdocs#readme"
+}
