@@ -38,9 +38,11 @@ Inline code like a \`\`\`VARIABLE NAME\`\`\` in a new line (break sensitivity).
 Also supports extensive syntax like ~~Strikethrough~~, ~sub-~ and ^superscript^.
 Highlighting via ==emphasized text==.
 
-# Heading 2 (1)
+# Heading 2 (1) {#custom-id}
 
 [Click here](/link-destination.html) to be redirected (link).
+
+![An image](/image.png)
 
 ## Unordered List (2)
 
@@ -65,7 +67,12 @@ Highlighting via ==emphasized text==.
     Also supports extensive syntax like <s>strikethrough</s>, <sub>sub-</sub> and <sup>superscript</sup>.<br>
     Highlighting via <em>emphasized text</em>.
 </p>
-<h1>Heading 1 (1)</h1>
+<h1 id="custom-id">Heading 2 (1)</h1>
+<p>
+    <a href="/link-destination.html">Click here</a> to be redirected (link).<br>
+    <br>
+    <img src="/image.png" alt="An image">
+</p>
 <h2>Unordered List (2)</h2>
 <ul>
     <li>List item 1</li>
