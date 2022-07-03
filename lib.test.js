@@ -31,26 +31,57 @@ function test(code, expectedTranslation) {
 
 
 test(`
-# Heading 1
+# Heading 1 (1)
 
 **Bold text *italic* with nested inline styles** and an unstyled end.
 Inline code like a \`\`\`VARIABLE NAME\`\`\` in a new line (break sensitivity).
 Also supports extensive syntax like ~~Strikethrough~~, ~sub-~ and ^superscript^.
 Highlighting via ==emphasized text==.
 
-## Heading 2
+# Heading 2 (1)
+
+[Click here](/link-destination.html) to be redirected (link).
+
+## Unordered List (2)
+
+- List item 1
+- List item 2
+
+## Ordered List (2)
+
+1. List item 1
+2. List item 2
+2. List item 3
 
 ---
+
+> This is a multiline blockquote.
+> Indicated from each line.
 `, `
-<h1>Heading 1</h1>
+<h1>Heading 1 (1)</h1>
 <p>
     <b>Bold text <i>italic</i> with inline styles</b> and an unstyled end.<br>
     Inline code like a <code>VARIABLE NAME</code> in a new line (break sensitivity).<br>
     Also supports extensive syntax like <s>strikethrough</s>, <sub>sub-</sub> and <sup>superscript</sup>.<br>
     Highlighting via <em>emphasized text</em>.
 </p>
-<h2>Heading 2</h2>
+<h1>Heading 1 (1)</h1>
+<h2>Unordered List (2)</h2>
+<ul>
+    <li>List item 1</li>
+    <li>List item 2</li>
+</ul>
+<h2>Ordered List (2)</h2>
+<ol>
+    <li>List item 1</li>
+    <li>List item 2</li>
+    <li>List item 3</li>
+</ol>
 <hr>
+<blockquote>
+    This is a multiline blockquote.
+    Indicated from each line.
+</blockquote>
 `);
 
 
