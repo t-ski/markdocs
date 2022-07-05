@@ -12,11 +12,9 @@ npm i t-ski/markdocs
 const markdocs = require("t-ski/markdocs");
 ```
 
-## Usage
+## Translation
 
-### Translation
-
-#### String Sequence
+### String
 
 ``` js
 const result = markdocs.translateStr(`
@@ -26,20 +24,24 @@ const result = markdocs.translateStr(`
 `);
 ```
 
-> <h1>Title</h1>
-> <p>
->     This is a <b>paragraph</b>.
-> </p>
+↳
 
-#### From File
+``` html
+<h1>Title</h1>
+<p>
+    This is a <b>paragraph</b>.
+</p>
+```
+
+### File
 
 ``` js
 const result = markdocs.translateStr("./docs/INTRO.md");
 ```
 
-### Custom Elements
+## Custom Elements
 
-#### Block Elements
+### Block Elements
 
 Indicated with a line prefix followed by a space character.
 
@@ -47,7 +49,7 @@ Indicated with a line prefix followed by a space character.
 new markdocs.BlockElement("Custom Block Element", "q" , "div", "|");
 ```
 
-#### Fenced Block Elements
+### Fenced Block Elements
 
 Indicated with a line prefix followed by a space character. Respectively fencing content until the next prefix occurrence.
 
@@ -57,8 +59,97 @@ new markdocs.FencedBlockElement("Custom Fenced Block Element", code => {
 } , null, "|");
 ```
 
-#### Inline Elements
+### Inline Elements
 
 ``` js
 new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
+```
+
+## Default Elements (markdown syntax)
+
+- [x] Headings {1, ... , 6}
+```
+# Heading {#optional-id}
+```
+
+- [x] Blockquote  
+```
+> Blockquote...
+```
+
+- [x] Ordered List  
+```
+1. List item
+2. List item
+```
+
+- [x] Unordered List  
+```
+- List item
+- List item
+```
+
+- [x] Horizontal Rule  
+```
+---
+```
+
+- [x] Table  
+```
+| Table head 1    | Table head 2    |
+| --------------- | --------------: |
+| Table entry 1.1 | Table entry 2.1 |
+| Table entry 1.2 | Table entry 2.2 |
+```
+
+- [x] Fenced Code  
+```
+``` js
+alert("Hello world!");
+```
+```
+
+- [x] Link  
+```
+[Click here](./link.html)
+```
+
+- [x] Image  
+```
+![Logo](./img/logo.svg)
+```
+
+- [x] Bold  
+```
+**Bold text**
+```
+
+- [x] Italic  
+```
+*Italic text*
+```
+
+- [x] Strikethrough  
+```
+~Strikethrough text~
+```
+
+- [x] Highlight  
+```
+==Highlighted text==
+```
+
+- [x] Subscript  
+```
+A~sub~
+```
+
+- [x] Superscript  
+```
+B^sup^
+```
+
+- [x] Inline code  
+```
+```INLINE CODE```
 ```
