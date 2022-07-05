@@ -1,36 +1,11 @@
+
+const { writeFileSync, mkdirSync, rmdirSync } = require("fs");
+const { join, dirname } = require("path");
+
 const lib = require("./lib/api");
 
 
-let testCounter = 0;
-
-
-function test(code, expectedTranslation) {
-    const unifyCode = code => {
-        return code.replace(/\s*(<)|(>|\n)\s*/g, "$1$2");
-    };
-
-    const actualTranslation = lib.translate(code);
-
-    testCounter++;
-    
-    if(unifyCode(actualTranslation) === unifyCode(expectedTranslation)) {
-        return;
-    }
-
-    const displayCode = (caption, code) => {
-        console.log(`\x1b[1m\x1b[33m––– ${caption}:\x1b[0m\x1b[2m\x1b[3m\x1b[37m\n${code}\x1b[0m`);
-    };
-
-    console.log(`\n\x1b[31mTest ${testCounter} has failed:\n`);
-    displayCode("CODE", code);
-    displayCode("EXPECTED", expectedTranslation);
-    displayCode("ACTAUL", actualTranslation);
-
-    process.exit(1);
-}
-
-
-test(`
+const SRC_CODE = `
 # Heading 1 (1)
 
 **Bold text *italic* with nested inline styles** and an unstyled end.
@@ -78,7 +53,9 @@ const a = 1;
 
 alert(a);
 \`\`\`
-`, `
+`;
+
+const EXP_TRANSLATION = `
 <h1>Heading 1 (1)</h1>
 <p>
     <b>Bold text <i>italic</i> with nested inline styles</b> and an unstyled end.<br>
@@ -137,7 +114,52 @@ alert(a);
 
     alert(a);
 </code>
-`);
+`;
+
+
+const testFilePath = "./test/TEST.md";
+const localTestFilePath = join(__dirname, "./test/TEST.md");
+
+mkdirSync(dirname(localTestFilePath));
+writeFileSync(localTestFilePath, SRC_CODE);
+
+process.on("exit", _ => {
+    rmdirSync(dirname(localTestFilePath), {
+        recursive: true,
+        force: true
+    });
+});
+
+
+let testCounter = 0;
+
+
+function test(method, methodArg, expectedTranslation) {
+    const unifyCode = code => {
+        return code.replace(/\s*(<)|(>|\n)\s*/g, "$1$2");
+    };
+
+    const actualTranslation = method(methodArg);
+    
+    testCounter++;
+
+    if(unifyCode(actualTranslation) === unifyCode(expectedTranslation)) {
+        return;
+    }
+    
+    const displayCode = (caption, code) => {
+        console.log(`\x1b[1m\x1b[33m––– ${caption}:\x1b[0m\n\x1b[2m\x1b[3m\x1b[37m\n${code.trim()}\x1b[0m\n`);
+    };
+
+    console.log(`\n\x1b[31mTest ${testCounter} has failed:\n`);
+    displayCode("EXPECTED", expectedTranslation);
+    displayCode("ACTAUL", actualTranslation);
+
+    process.exit(1);
+}
+
+test(lib.translateStr, SRC_CODE, EXP_TRANSLATION);
+test(lib.translateFile, testFilePath, EXP_TRANSLATION);
 
 
 console.log(`\x1b[32mAll tests (${testCounter}) have successfully passed.\n`);
