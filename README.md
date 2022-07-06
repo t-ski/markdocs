@@ -49,21 +49,36 @@ Indicated with a line prefix followed by a space character.
 new markdocs.BlockElement("Custom Block Element", "q" , "div", "|");
 ```
 
-### Fenced Block Elements
-
-Indicated with a line prefix followed by a space character. Respectively fencing content until the next prefix occurrence.
+With options:
 
 ``` js
 new markdocs.FencedBlockElement("Custom Fenced Block Element", code => {
     return `<div class="custom-fenced">\n\t${code}\n</div>`;
-} , null, "|");
+} , null, "|", {
+    fenced: true,
+    inlineStyles: false
+});
 ```
+
+#### Options
+
+| Property | Purpose |
+| -------- | ------- |
+| fenced | Whether to have the element span content between an opening and a closing prefix (suffix). |
+| inlineStyles | Whether to parse inline elements and apply related styles to the element content |
+| standalone | Whether to only allow for the prefix and no content |
 
 ### Inline Elements
 
 ``` js
 new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
 ```
+
+#### Options
+
+| Property | Purpose |
+| -------- | ------- |
+| priority | Numeric (increasing) value to manipulate the parsing order (useful for ambiguous contexts) |
 
 ## Default Elements (markdown syntax)
 
@@ -103,11 +118,11 @@ new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
 ```
 
 - [x] Fenced Code  
-```
+<pre>
 ``` js
 alert("Hello world!");
 ```
-```
+</pre>
 
 - [x] Link  
 ```
@@ -150,6 +165,6 @@ B^sup^
 ```
 
 - [x] Inline code  
-```
-```INLINE CODE```
-```
+<pre>
+`INLINE CODE`
+</pre>
