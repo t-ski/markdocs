@@ -36,7 +36,7 @@ const result = markdocs.translateStr(`
 ### File
 
 ``` js
-const result = markdocs.translateStr("./docs/INTRO.md");
+const result = markdocs.translateFile("./docs/INTRO.md");
 ```
 
 ## Custom Elements
@@ -64,9 +64,9 @@ new markdocs.FencedBlockElement("Custom Fenced Block Element", code => {
 
 | Property | Purpose |
 | -------- | ------- |
-| fenced | Whether to have the element span content between an opening and a closing prefix (suffix). |
-| inlineStyles | Whether to parse inline elements and apply related styles to the element content |
-| standalone | Whether to only allow for the prefix and no content |
+| `fenced` | *Whether to have the element span content between an opening and a closing prefix (suffix)* |
+| `inlineStyles` | *Whether to parse inline elements and apply related styles to the element content* |
+| `standalone` | *Whether to only allow for the prefix and no content* |
 
 ### Inline Elements
 
@@ -78,7 +78,7 @@ new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
 
 | Property | Purpose |
 | -------- | ------- |
-| priority | Numeric (increasing) value to manipulate the parsing order (useful for ambiguous contexts) |
+| `priority` | *Numeric (increasing) value to manipulate the parsing order (useful for ambiguous contexts)* |
 
 ## Default Elements (markdown syntax)
 
