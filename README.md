@@ -1,6 +1,6 @@
 # markdocs
 
-Simple and fast markdown to HTML translator supporting custom elements.
+Simple and fast Markdown to HTML translator supporting custom elements.
 
 ## Installation
 
@@ -45,28 +45,13 @@ const result = markdocs.translateFile("./docs/INTRO.md");
 
 Indicated with a line prefix followed by a space character.
 
-``` js
-new markdocs.BlockElement("Custom Block Element", "q", "|" , "div");
-```
-
-With options:
-
-``` js
-new markdocs.BlockElement("Custom Fenced Block Element", code => {
-    return `<div class="custom-fenced">\n\t${code}\n</div>`;
-} , null, "|", {
-    fenced: true,
-    inlineStyles: false
-});
-```
-
 #### Syntax
 
 ` new markdocs.BlockElement(tokenName, tagNameOrWrapper, prefix, groupTagName, options) `
 
 | Parameter | Type | Purpose |
 | --------- | ---- | ------- |
-| `tokenName` | **String** |  *Token name for internal organization* |
+| `tokenName` | **String** | *Token name for internal organization* |
 | `tagNameOrWrapper` | **String, Function** | *Tag name (automatic) or function for (custom) wrapping* |
 | `prefix` | **String, RegExp** | *Prefix to associate with the element (RegExp escaped if given a string)* |
 | `groupTagName` | **String** | *Element compound group name to inject surrounding tag upon translation* |
@@ -80,15 +65,26 @@ new markdocs.BlockElement("Custom Fenced Block Element", code => {
 | `inlineStyles` | **Boolean** | *Whether to parse inline elements and apply related styles to the element content* |
 | `standalone` | **Boolean** | *Whether to only allow for the prefix and no content* |
 
-### Inline Elements
+#### Example
 
 ``` js
-new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
+new markdocs.BlockElement("Custom Block Element", "q", "|" , "div");
 ```
+
+``` js
+new markdocs.BlockElement("Custom Fenced Block Element", code => {
+    return `<div class="custom-fenced">\n\t${code}\n</div>`;
+} , null, "|", {
+    fenced: true,
+    inlineStyles: false
+});
+```
+
+### Inline Elements
 
 #### Syntax
 
-` new markdocs.BlockElement(tokenName, tagNameOrWrapper, pattern, options) `
+` new markdocs.InlineElement(tokenName, tagNameOrWrapper, pattern, options) `
 
 | Parameter | Type | Purpose |
 | --------- | ---- | ------- |
@@ -102,6 +98,12 @@ new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
 | Property | Type | Purpose |
 | -------- | ---- | ------- |
 | `priority` | **Number** | *Numeric (increasing) value to manipulate the parsing order (useful for ambiguous contexts)* |
+
+#### Example
+
+``` js
+new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
+```
 
 ## Default Elements (markdown syntax)
 
