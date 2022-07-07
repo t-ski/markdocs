@@ -43,7 +43,7 @@ const result = markdocs.translateFile("./docs/INTRO.md");
 
 ### Block Elements
 
-Indicated with a line prefix followed by a space character.
+Each line in Markdown code represents a block element (a paragraph if not specific). A block element is indicated with a line prefix followed by a space character. The succeeding character sequence is considered its content.
 
 #### Syntax
 
@@ -61,26 +61,38 @@ Indicated with a line prefix followed by a space character.
 
 | Property | Type | Purpose |
 | -------- | ---- | ------- |
-| `fenced` | **Boolean** | *Whether to have the element span content between an opening and a closing prefix (suffix)* |
+| `type` | **BlockElement.Type** | *Block element type* |
 | `inlineStyles` | **Boolean** | *Whether to parse inline elements and apply related styles to the element content* |
-| `standalone` | **Boolean** | *Whether to only allow for the prefix and no content* |
+
+#### Block element types
+
+| Name | Description |
+| ---- | ----------- |
+| `FENCED` | *A block is opened until the next occurrence of the prefix (acting as a suffix). The lines in between are representing the respective block content.* |
+| `STANDALONE` | *A block does only consist of the prefix and does not allow for content. A standlone block is rendered as an empty tag.* |
+
+#### Custom wrapper
+
+A custom wrapper function is getting passed either a content string or – iff associated with a fenced element – a content string array with the indicating line content (index 0), the spanned body contents (index 1, concatenated lines) and the closing line content (index 2). The returned value is used as the wrapped substitute for the raw parsing in the translation.
 
 #### Example
 
 ``` js
-new markdocs.BlockElement("Custom Block Element", "q", "|" , "div");
+new markdocs.BlockElement("Custom Block Element", "q", "|", "div");
 ```
 
 ``` js
 new markdocs.BlockElement("Custom Fenced Block Element", code => {
-    return `<div class="custom-fenced">\n\t${code}\n</div>`;
+    return `<div class="custom-fenced">\n${code}\n</div>`;
 } , null, "|", {
-    fenced: true,
-    inlineStyles: false
+    inlineStyles: false,
+    type: BlockElement.Type.FENCED
 });
 ```
 
 ### Inline Elements
+
+Inline elements represent a certain (recurring) pattern occurrence in block contents. They are used for applying generic styles.
 
 #### Syntax
 
@@ -105,7 +117,11 @@ new markdocs.BlockElement("Custom Fenced Block Element", code => {
 new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
 ```
 
-## Default Elements (markdown syntax)
+---
+
+## Default Elements (supported MD)
+
+### Block elements
 
 - [x] Headings {1, ... , 6}
 ```
@@ -148,6 +164,8 @@ new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
 alert("Hello world!");
 ```
 </pre>
+
+### Inline elements
 
 - [x] Link  
 ```
