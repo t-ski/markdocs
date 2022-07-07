@@ -1,7 +1,7 @@
 # markdocs
 
 Simple and fast Markdown to HTML translator supporting custom elements.
-
+  
 ## Installation
 
 ``` bash
@@ -11,7 +11,7 @@ npm i t-ski/markdocs
 ``` js
 const markdocs = require("t-ski/markdocs");
 ```
-
+  
 ## Translation
 
 ### String
@@ -39,6 +39,22 @@ const result = markdocs.translateStr(`
 const result = markdocs.translateFile("./docs/INTRO.md");
 ```
 
+#### Overloads
+
+• Invoke callback on translation result:
+
+``` js
+const result = markdocs.translateFile("./docs/INTRO.md", result => {
+    console.log(`Length of HTML representation: ${result.length}`);
+});
+```
+
+• Write translation result to file at given path:
+
+``` js
+const result = markdocs.translateFile("./docs/INTRO.md", "./web/introduction.html");
+```
+  
 ## Custom Elements
 
 ### Block Elements
@@ -84,7 +100,7 @@ new markdocs.BlockElement("Custom Block Element", "q", "|", "div");
 ``` js
 new markdocs.BlockElement("Custom Fenced Block Element", code => {
     return `<div class="custom-fenced">\n${code}\n</div>`;
-} , null, "|", {
+}, "|", null, {
     inlineStyles: false,
     type: BlockElement.Type.FENCED
 });
@@ -116,7 +132,7 @@ Inline elements represent a certain (recurring) pattern occurrence in block cont
 ``` js
 new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
 ```
-
+  
 ---
 
 ## Default Elements (supported MD)
