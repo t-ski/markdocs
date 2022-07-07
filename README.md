@@ -1,7 +1,7 @@
 # markdocs
 
 Simple and fast Markdown to HTML translator supporting custom elements.
-  
+
 ## Installation
 
 ``` bash
@@ -11,10 +11,10 @@ npm i t-ski/markdocs
 ``` js
 const markdocs = require("t-ski/markdocs");
 ```
-  
+
 ## Translation
 
-### String
+### From string
 
 ``` js
 const result = markdocs.translateStr(`
@@ -33,7 +33,7 @@ const result = markdocs.translateStr(`
 </p>
 ```
 
-### File
+### From file
 
 ``` js
 const result = markdocs.translateFile("./docs/INTRO.md");
@@ -54,16 +54,16 @@ const result = markdocs.translateFile("./docs/INTRO.md", result => {
 ``` js
 const result = markdocs.translateFile("./docs/INTRO.md", "./web/introduction.html");
 ```
-  
-## Custom Elements
 
-### Block Elements
+## Block Elements
 
 Each line in Markdown code represents a block element (a paragraph if not specific). A block element is indicated with a line prefix followed by a space character. The succeeding character sequence is considered its content.
 
-#### Syntax
+### Declaration syntax
 
-` new markdocs.BlockElement(tokenName, tagNameOrWrapper, prefix, groupTagName, options) `
+```
+new markdocs.BlockElement(tokenName, tagNameOrWrapper, prefix, groupTagName, options)
+```
 
 | Parameter | Type | Purpose |
 | --------- | ---- | ------- |
@@ -73,25 +73,25 @@ Each line in Markdown code represents a block element (a paragraph if not specif
 | `groupTagName` | **String** | *Element compound group name to inject surrounding tag upon translation* |
 | `options` | **Object** | *Options object* |
 
-#### Options
+### Options
 
 | Property | Type | Purpose |
 | -------- | ---- | ------- |
 | `type` | **BlockElement.Type** | *Block element type* |
 | `inlineStyles` | **Boolean** | *Whether to parse inline elements and apply related styles to the element content* |
 
-#### Block element types
+### Block element types
 
 | Name | Description |
 | ---- | ----------- |
 | `FENCED` | *A block is opened until the next occurrence of the prefix (acting as a suffix). The lines in between are representing the respective block content.* |
 | `STANDALONE` | *A block does only consist of the prefix and does not allow for content. A standlone block is rendered as an empty tag.* |
 
-#### Custom wrapper
+### Custom wrapper
 
 A custom wrapper function is getting passed either a content string or – iff associated with a fenced element – a content string array with the indicating line content (index 0), the spanned body contents (index 1, concatenated lines) and the closing line content (index 2). The returned value is used as the wrapped substitute for the raw parsing in the translation.
 
-#### Example
+### Example
 
 ``` js
 new markdocs.BlockElement("Custom Block Element", "q", "|", "div");
@@ -106,13 +106,15 @@ new markdocs.BlockElement("Custom Fenced Block Element", code => {
 });
 ```
 
-### Inline Elements
+## Inline Elements
 
 Inline elements represent a certain (recurring) pattern occurrence in block contents. They are used for applying generic styles.
 
-#### Syntax
+### Declaration syntax
 
-` new markdocs.InlineElement(tokenName, tagNameOrWrapper, pattern, options) `
+```
+new markdocs.InlineElement(tokenName, tagNameOrWrapper, pattern, options)
+```
 
 | Parameter | Type | Purpose |
 | --------- | ---- | ------- |
@@ -121,18 +123,19 @@ Inline elements represent a certain (recurring) pattern occurrence in block cont
 | `pattern` | **RegExp** | *Occurrence pattern* |
 | `options` | **Object** | *Options object* |
 
-#### Options
+### Options
 
 | Property | Type | Purpose |
 | -------- | ---- | ------- |
 | `priority` | **Number** | *Numeric (increasing) value to manipulate the parsing order (useful for ambiguous contexts)* |
 
-#### Example
+### Example
 
 ``` js
 new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
 ```
   
+---
 ---
 
 ## Default Elements (supported MD)
