@@ -46,13 +46,13 @@ const result = markdocs.translateFile("./docs/INTRO.md");
 Indicated with a line prefix followed by a space character.
 
 ``` js
-new markdocs.BlockElement("Custom Block Element", "q" , "div", "|");
+new markdocs.BlockElement("Custom Block Element", "q", "|" , "div");
 ```
 
 With options:
 
 ``` js
-new markdocs.FencedBlockElement("Custom Fenced Block Element", code => {
+new markdocs.BlockElement("Custom Fenced Block Element", code => {
     return `<div class="custom-fenced">\n\t${code}\n</div>`;
 } , null, "|", {
     fenced: true,
@@ -60,13 +60,25 @@ new markdocs.FencedBlockElement("Custom Fenced Block Element", code => {
 });
 ```
 
+#### Syntax
+
+` new markdocs.BlockElement(tokenName, tagNameOrWrapper, prefix, groupTagName, options) `
+
+| Parameter | Type | Purpose |
+| --------- | ---- | ------- |
+| `tokenName` | **String** |  *Token name for internal organization* |
+| `tagNameOrWrapper` | **String, Function** | *Tag name (automatic) or function for (custom) wrapping* |
+| `prefix` | **String, RegExp** | *Prefix to associate with the element (RegExp escaped if given a string)* |
+| `groupTagName` | **String** | *Element compound group name to inject surrounding tag upon translation* |
+| `options` | **Object** | *Options object* |
+
 #### Options
 
-| Property | Purpose |
-| -------- | ------- |
-| `fenced` | *Whether to have the element span content between an opening and a closing prefix (suffix)* |
-| `inlineStyles` | *Whether to parse inline elements and apply related styles to the element content* |
-| `standalone` | *Whether to only allow for the prefix and no content* |
+| Property | Type | Purpose |
+| -------- | ---- | ------- |
+| `fenced` | **Boolean** | *Whether to have the element span content between an opening and a closing prefix (suffix)* |
+| `inlineStyles` | **Boolean** | *Whether to parse inline elements and apply related styles to the element content* |
+| `standalone` | **Boolean** | *Whether to only allow for the prefix and no content* |
 
 ### Inline Elements
 
@@ -74,11 +86,22 @@ new markdocs.FencedBlockElement("Custom Fenced Block Element", code => {
 new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
 ```
 
+#### Syntax
+
+` new markdocs.BlockElement(tokenName, tagNameOrWrapper, pattern, options) `
+
+| Parameter | Type | Purpose |
+| --------- | ---- | ------- |
+| `tokenName` | **String** | *Token name for internal organization* |
+| `tagNameOrWrapper` | **String, Function** | *Tag name (automatic) or function for (custom) wrapping* |
+| `pattern` | **RegExp** | *Occurrence pattern* |
+| `options` | **Object** | *Options object* |
+
 #### Options
 
-| Property | Purpose |
-| -------- | ------- |
-| `priority` | *Numeric (increasing) value to manipulate the parsing order (useful for ambiguous contexts)* |
+| Property | Type | Purpose |
+| -------- | ---- | ------- |
+| `priority` | **Number** | *Numeric (increasing) value to manipulate the parsing order (useful for ambiguous contexts)* |
 
 ## Default Elements (markdown syntax)
 
