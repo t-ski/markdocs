@@ -132,10 +132,9 @@ new markdocs.InlineElement(tokenName, tagNameOrWrapper, pattern, options)
 ### Example
 
 ``` js
-new markdocs.InlineElement("Custom Inline Element", "span" , null, "::");
+new markdocs.InlineElement("Custom Inline Element", "span" , "::");
 ```
   
----
 ---
 
 ## Default Elements (supported MD)
