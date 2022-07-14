@@ -229,3 +229,7 @@ B^sup^
 <pre>
 `INLINE CODE`
 </pre>
+
+## 
+
+<sub>© Thassilo Martin Schiepanski</sub>
