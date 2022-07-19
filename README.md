@@ -5,7 +5,7 @@ Simple and fast Markdown to HTML translator supporting custom elements.
 ## Installation
 
 ``` bash
-npm i @t-ski/markdocs
+npm i t-ski/markdocs
 ```
 
 ``` js
