@@ -2,7 +2,7 @@
   "name": "markdocs",
   "version": "0.1.0",
   "description": "",
-  "main": "/lib/api.js",
+  "main": "./lib/api.js",
   "directories": {
     "lib": "lib"
   },
