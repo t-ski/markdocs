@@ -9,7 +9,7 @@ npm i t-ski/markdocs
 ```
 
 ``` js
-const markdocs = require("t-ski/markdocs");
+const markdocs = require("markdocs");
 ```
 
 ## Translation
