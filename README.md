@@ -102,7 +102,7 @@ new markdocs.BlockElement("Custom Fenced Block Element", code => {
     return `<div class="custom-fenced">\n${code}\n</div>`;
 }, "|", null, {
     inlineStyles: false,
-    type: BlockElement.Type.FENCED
+    type: markdocs.BlockElement.Type.FENCED
 });
 ```
 

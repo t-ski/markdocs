@@ -109,7 +109,7 @@ const EXP_TRANSLATION = `
     | ------------ | --- |<br>
     | Entry 1.1 | Entry 2.1 |<br>
 </p>
-<code>
+<code language="js">
     const a = 1;
 
     alert(a);
