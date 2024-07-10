@@ -1,3 +1,6 @@
-package-lock.json
+node_modules/
+build/
+types/
 
-/test
+.DS_Store
+package-lock.json

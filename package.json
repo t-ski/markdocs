@@ -7,14 +7,31 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "node lib.test.js"
+		"prepare": "npx husky install",
+    "compile": "npx tsc --project ./tsconfig.debug.json",
+    "compile:watch": "npm run compile -- --watch",
+    "build": "rm -rf ./build/ && rm -rf ./types/ && npx tsc --project ./tsconfig.build.json",
+		"lint": "npx eslint ./src/*.ts",
+		"lint:fix": "npx eslint --fix ./src/*.ts",
+		"format": "npx prettier --check ./src/*.ts",
+		"format:fix": "npx prettier --write ./src/**/*.ts",
+    "test": "node ./scripts/test.js"
+  },
+  "devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^7.8.0",
+		"@typescript-eslint/parser": "^7.8.0",
+		"eslint": "^8.57.0",
+		"eslint-plugin-typescript": "^0.14.0",
+		"typescript-eslint": "^7.8.0",
+    "typescript": "^5.3.3",
+		"husky": "^9.0.11",
+		"lint-staged": "^15.2.2"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/t-ski/markdocs.git"
   },
   "author": "Thassilo Martin Schiepanski",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/t-ski/markdocs/issues"
   },
